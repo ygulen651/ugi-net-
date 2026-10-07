@@ -1,8 +1,18 @@
 import { ArrowUpRight, Camera, Code2, Megaphone, PenTool } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { projects, type ServiceKey } from "./content";
 
 export function Logo({ footer = false }: { footer?: boolean }) {
-  return <a className={`logo ${footer ? "logo-footer" : ""}`} href="#top" aria-label="Ugi Ajans"><span>ugi<span className="logo-dot">.</span></span><small>CREATIVE<br />AGENCY</small></a>;
+  return <Link className={`logo ${footer ? "logo-footer" : ""}`} href="/" aria-label="Ugi Ajans">
+    {footer && <svg width="0" height="0" aria-hidden="true" focusable="false" style={{ position: "absolute" }}>
+      <defs><filter id="ugi-footer-ink" colorInterpolationFilters="sRGB">
+        {/* Darken the neutral white lettering while preserving yellow and alpha. */}
+        <feColorMatrix type="matrix" values="1 0 -0.96862745 0 0  0 1 -0.96862745 0 0  0 0 0.03137255 0 0  0 0 0 1 0" />
+      </filter></defs>
+    </svg>}
+    <Image src="/images/LOGOa.webp" alt="" width={120} height={94} sizes="88px" unoptimized />
+  </Link>;
 }
 export function ServiceIcon({ type }: { type: ServiceKey }) {
   const Icon = { web: Code2, production: Camera, design: PenTool, digital: Megaphone }[type];
