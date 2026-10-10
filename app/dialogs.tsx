@@ -3,7 +3,7 @@ import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { ArrowUpRight, ArrowLeft, Check, Download, Pause, Play, Plus } from "lucide-react";
 import { navOrder, services, type Lang, type ServiceKey } from "./content";
 
-export function QuoteForm({ lang }: { lang: Lang }) {
+export function QuoteForm({ lang, headingId = "modal-title" }: { lang: Lang; headingId?: string }) {
   const [selected, setSelected] = useState<ServiceKey[]>([]);
   const [brief, setBrief] = useState("");
   const [copied, setCopied] = useState(false);
@@ -14,7 +14,7 @@ export function QuoteForm({ lang }: { lang: Lang }) {
     setBrief(`${t("UGI AJANS — PROJE ÖZETİ", "UGI AGENCY — PROJECT BRIEF")}\n\n${t("Ad Soyad", "Name")}: ${String(data.get("name")).trim()}\n${t("E-posta", "Email")}: ${data.get("email")}\n${t("Marka", "Brand")}: ${data.get("brand") || "—"}\n${t("Hizmetler", "Services")}: ${selected.map(key => services[key].name[lang === "tr" ? 0 : 1]).join(", ") || t("Birlikte belirleyelim", "Let's decide together")}\n${t("Bütçe", "Budget")}: ${data.get("budget") || t("Birlikte belirleyelim", "Let's decide together")}\n\n${t("Proje", "Project")}:\n${String(data.get("message")).trim()}`);
   };
   const download = () => { const url = URL.createObjectURL(new Blob([brief], { type: "text/plain;charset=utf-8" })); const link = document.createElement("a"); link.href = url; link.download = "ugi-proje-ozeti.txt"; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); };
-  return <><span className="eyebrow">{t("GÜZEL BİR BAŞLANGIÇ", "A GREAT BEGINNING")}</span><h2 id="modal-title">{t("Bir fikriniz mi var?", "Have an idea?")}<br /><span className="muted">{t("Birlikte büyütelim.", "Let's make it happen.")}</span></h2>
+  return <><span className="eyebrow">{t("GÜZEL BİR BAŞLANGIÇ", "A GREAT BEGINNING")}</span><h2 id={headingId}>{t("Bir fikriniz mi var?", "Have an idea?")}<br /><span className="muted">{t("Birlikte büyütelim.", "Let's make it happen.")}</span></h2>
     <form onSubmit={submit} hidden={Boolean(brief)}><p className="form-intro">{t("Projenizden kısaca bahsedin. İlk adımı birlikte şekillendirelim.", "Tell us a little about your project. Let's shape the first step together.")}</p>
       <div className="form-row"><label>{t("Adınız Soyadınız", "Your name")}<input name="name" autoComplete="name" placeholder={t("Adınız Soyadınız", "Full name")} required pattern=".*\S.*" maxLength={120} /></label><label>{t("E-posta adresiniz", "Your email")}<input type="email" name="email" autoComplete="email" placeholder="siz@markaniz.com" required maxLength={200} /></label></div>
       <label>{t("Markanız / Şirketiniz", "Your brand / company")}<input name="brand" autoComplete="organization" placeholder={t("Markanızın adı", "Brand name")} maxLength={150} /></label>

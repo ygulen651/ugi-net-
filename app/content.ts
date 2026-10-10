@@ -10,7 +10,7 @@ export const services: Record<ServiceKey, { name: Pair; title: Pair; description
 };
 export const serviceOrder: ServiceKey[] = ["web", "design", "production", "digital"];
 export const navOrder: ServiceKey[] = ["web", "production", "design", "digital"];
-export const navLinks = [["Projeler", "Projects", "projeler"], ["Kısaca Biz", "About", "biz"], ["Blog", "Journal", "blog"], ["İletişim", "Contact", "iletisim"]];
+export const navLinks = [["Projeler", "Projects", "projeler"], ["Hakkımızda", "About", "biz"], ["Blog", "Journal", "blog"], ["İletişim", "Contact", "iletisim"]];
 export const projects = [
   { name: "NOVA", suffix: "STUDIO", color: "blue", title: ["Nova Studio", "Nova Studio"] as Pair, type: ["MARKA KİMLİĞİ · WEB DENEYİMİ", "BRAND IDENTITY · WEB EXPERIENCE"] as Pair, text: ["Bir mimarlık stüdyosu için mekân, ışık ve yalınlık üzerine bir marka dünyası. Güçlü tipografiyi akıcı bir dijital deneyimle buluşturan konsept çalışma.", "A brand world built around space, light, and simplicity for an architecture studio. A concept exploring bold typography and a fluid digital experience."] as Pair },
   { name: "luma", suffix: "EVERYDAY, ELEVATED.", color: "pink", title: ["Luma Living", "Luma Living"] as Pair, type: ["SANAT YÖNETİMİ · AMBALAJ TASARIMI", "ART DIRECTION · PACKAGING DESIGN"] as Pair, text: ["Gündelik hayatın küçük ritüellerinden ilham alan bir yaşam markası. Sıcak renkler, yumuşak formlar ve raf üzerinde fark edilen bir ambalaj dili için konsept çalışma.", "A lifestyle brand inspired by everyday rituals. A concept in warm colors, soft forms, and packaging that stands out on the shelf."] as Pair },

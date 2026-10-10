@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./interactions.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ugi-ajans.benmustafademircitr.chatgpt.site"),
@@ -20,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr">
-      <head><link rel="stylesheet" href="/fonts/google-fonts.css" /><link rel="preload" as="image" href="/images/landscape.jpg" /></head>
+      <head><link rel="stylesheet" href="/fonts/google-fonts.css" /><link rel="preload" as="image" href="/images/hero-owl.webp" /></head>
       <body>{children}</body>
     </html>
   );

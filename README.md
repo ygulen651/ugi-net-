@@ -32,7 +32,7 @@ Hizmet ve proje metinleri `app/content.ts`, sayfa `app/ugi-home.tsx`, etkileşim
 
 ## Önizleme içeriği
 
-Kullanıcı iletişim bilgilerini daha sonra eklemeyi seçti. Form bilgileri ajansa göndermez; bu durum formda açıkça belirtilir. E-posta, telefon ve sosyal hesap uydurulmamıştır.
+İletişim kanalları WhatsApp (`+90 530 783 33 70`) ve e-posta (`info@ugi.net.tr`) olarak tanımlıdır. Proje özeti formu bilgileri otomatik göndermez; kullanıcı özeti indirip bu kanallardan iletebilir.
 
 Nova Studio, Luma Living ve Forma Active kurgusal konsept çalışmalardır. Showreel, animasyonlu bir marka konseptidir. Gerçek müşteri işleri ve video sağlandığında değiştirilebilir. Önizleme arama motorları için `noindex` olarak ayarlanmıştır.
 

@@ -1,24 +1,44 @@
 import { ArrowUpRight, Camera, Code2, Megaphone, PenTool } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { projects, type ServiceKey } from "./content";
 
 export function Logo({ footer = false }: { footer?: boolean }) {
-  return <a className={`logo ${footer ? "logo-footer" : ""}`} href="#top" aria-label="Ugi Ajans"><span>ugi<span className="logo-dot">.</span></span><small>CREATIVE<br />AGENCY</small></a>;
+  return <Link className={`logo ${footer ? "logo-footer" : ""}`} href="/" aria-label="Ugi Ajans">
+    {footer && <svg width="0" height="0" aria-hidden="true" focusable="false" style={{ position: "absolute" }}>
+      <defs><filter id="ugi-footer-ink" colorInterpolationFilters="sRGB">
+        {/* Darken the neutral white lettering while preserving yellow and alpha. */}
+        <feColorMatrix type="matrix" values="1 0 -0.96862745 0 0  0 1 -0.96862745 0 0  0 0 0.03137255 0 0  0 0 0 1 0" />
+      </filter></defs>
+    </svg>}
+    <Image src="/images/LOGOa.webp" alt="" width={120} height={94} sizes="88px" unoptimized />
+  </Link>;
 }
 export function ServiceIcon({ type }: { type: ServiceKey }) {
   const Icon = { web: Code2, production: Camera, design: PenTool, digital: Megaphone }[type];
   return <Icon size={24} strokeWidth={1.4} />;
 }
+
+const serviceMascots: Record<ServiceKey, { src: string; width: number; height: number }> = {
+  web: { src: "/images/MASKOTLAR/ugi-startup-page.png", width: 1467, height: 1524 },
+  design: { src: "/images/MASKOTLAR/owl-portfolio-page.png", width: 1344, height: 1380 },
+  production: { src: "/images/MASKOTLAR/transition-owl.webp", width: 1100, height: 825 },
+  digital: { src: "/images/MASKOTLAR/ugi-journal-page.png", width: 1548, height: 1604 },
+};
+
 export function ServiceArt({ type }: { type: ServiceKey }) {
-  return <div className={`service-art art-${type}`} aria-hidden="true">
-    <div className="art-small art-small-one">{type === "web" ? "</>" : type === "design" ? "Aa" : type === "production" ? <Camera size={46} strokeWidth={1.2} /> : "↗"}</div>
-    <div className="art-small art-small-two">{type === "web" ? "CREATIVE\nTHINKING" : type === "design" ? "GOOD\nBY DESIGN." : type === "production" ? "REC ●" : "MAKE\nSOME NOISE."}</div>
-    <div className="art-side"><span>{type === "web" ? "DIGITAL EXPERIENCES" : type === "design" ? "LESS, BUT BETTER" : type === "production" ? "EVERY FRAME MATTERS" : "IDEAS THAT CONNECT"}</span><span className="art-side-mark">✳</span></div>
-    <div className="art-main"><div className="art-topline"><span>UGI® — CREATIVE STUDIO</span><ArrowUpRight size={20} /></div>
-      {type === "web" && <><div className="window-dots"><i /><i /><i /></div><strong>Code<br />the<br /><em>future.</em></strong><span className="art-caption">DESIGNED TO MAKE A DIFFERENCE.</span></>}
-      {type === "design" && <><div className="design-flower">✳</div><strong>Make<br />it <em>matter.</em></strong><span className="art-caption">A DISTINCTIVE POINT OF VIEW.</span></>}
-      {type === "production" && <><div className="camera-eye"><div /><span /></div><strong>Another<br /><em>perspective.</em></strong><span className="viewfinder-corner corner-a" /><span className="viewfinder-corner corner-b" /><span className="art-caption">00:00:24:08 <span>4K / 25 FPS</span></span></>}
-      {type === "digital" && <><div className="digital-orbit"><span>↗</span></div><strong>Turn up<br />the <em>volume.</em></strong><span className="art-caption">REAL CONNECTIONS. REAL IMPACT.</span></>}
-    </div>
+  const mascot = serviceMascots[type];
+  return <div className={`service-art service-art-mascot service-mascot-${type}`} aria-hidden="true">
+    <span className="service-mascot-halo" />
+    <Image
+      className="service-mascot-image"
+      src={mascot.src}
+      alt=""
+      width={mascot.width}
+      height={mascot.height}
+      sizes="(max-width: 640px) 84vw, (max-width: 980px) 43vw, 510px"
+      unoptimized
+    />
   </div>;
 }
 export function ProjectArt({ index }: { index: number }) {
