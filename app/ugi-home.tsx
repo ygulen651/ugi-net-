@@ -16,19 +16,29 @@ import { serviceCatalog, serviceHref } from "./service-catalog";
 import { ServiceDetail } from "./web-service-detail";
 import { contactInfo } from "./contact-info";
 
-const referenceBrands = [
-  { name: "Anı Makarna", src: "/images/brands/ani.png", width: 1400, height: 709 },
-  { name: "Anı Bisküvi", src: "/images/brands/ani.png", width: 1400, height: 709 },
-  { name: "Saray Bisküvi", src: "/images/brands/saray.svg", width: 720, height: 360 },
-  { name: "Oslo", src: "/images/brands/oslo.png", width: 1200, height: 1200 },
-  { name: "Chubby Chicken", src: "/images/brands/chubby.png", width: 199, height: 170 },
-  { name: "360 Karaman", src: "/images/brands/360.png", width: 512, height: 512 },
-  { name: "Kartap", src: "/images/brands/kartap.png", width: 827, height: 189 },
-  { name: "Karaman Ulak", src: "/images/brands/ulak.png", width: 368, height: 47 },
-  { name: "Pamir Villaları", src: "/images/brands/pamir-villalari.png", width: 373, height: 152 },
-  { name: "İlkem", src: "/images/brands/ilkem.png", width: 1340, height: 1400 },
-  { name: "Sıla Evde Bakım", src: "/images/brands/sila-evde-bakim.png", width: 159, height: 249 },
-  { name: "Detay Sigorta", src: "/images/brands/detay-sigorta.png", width: 961, height: 350 },
+type ReferenceBrand = {
+  name: string;
+  src: string;
+  width: number;
+  height: number;
+  tone?: "dark";
+};
+
+const referenceBrands: ReferenceBrand[] = [
+  { name: "Anı Makarna", src: "/images/brands/logo-siyah.svg", width: 312, height: 57 },
+  { name: "Anı Bisküvi", src: "/images/brands/anibisklogo.svg", width: 842, height: 595 },
+  { name: "Bifa", src: "/images/brands/bifalogo.png", width: 132, height: 105 },
+  { name: "Canbis Gıda", src: "/images/brands/canbisgidalogo.png", width: 1024, height: 503 },
+  { name: "Duru Bulgur", src: "/images/brands/durubulgurlogo.png", width: 280, height: 102 },
+  { name: "Hakan Gıda", src: "/images/brands/hakangidalogo.png", width: 1691, height: 312, tone: "dark" },
+  { name: "İKEV", src: "/images/brands/ikev logo.png", width: 205, height: 97, tone: "dark" },
+  { name: "KARTAP", src: "/images/brands/kartaplogo.png", width: 1146, height: 262 },
+  { name: "Lark Gıda", src: "/images/brands/larkgidalogo.svg", width: 492, height: 110 },
+  { name: "Memleketim", src: "/images/brands/memleketimlogo.png", width: 214, height: 103, tone: "dark" },
+  { name: "Nova İnşaat", src: "/images/brands/novalogo.png", width: 6498, height: 2179, tone: "dark" },
+  { name: "Karaman OSB", src: "/images/brands/osblogo.png", width: 1141, height: 91 },
+  { name: "Oslo Gıda", src: "/images/brands/oslogidalogo.png", width: 133, height: 76 },
+  { name: "Saray Bisküvi", src: "/images/brands/saray_biskuvi.png", width: 360, height: 190 },
 ];
 
 export default function UgiHome({ serviceSlug, page, articleSlug }: { serviceSlug?: string; page?: AgencyPageKey; articleSlug?: string }) {
@@ -117,7 +127,7 @@ export default function UgiHome({ serviceSlug, page, articleSlug }: { serviceSlu
 
       <ServiceStack motion={motion}>{serviceOrder.map((key, index) => <section className={`service-section service-${key}`} key={key} id={`hizmet-${key}`} style={{ zIndex: index + 1 }}><div className="service-inner"><div className="service-visual"><span className="service-corner-index">0{index + 1} / 04</span><ServiceArt type={key} /></div><div className="service-copy"><span className="eyebrow">{t("FİKİRLERİNİZE ALAN AÇIYORUZ", "ROOM FOR YOUR IDEAS")}</span><h2><strong>{b(services[key].title).split(" ")[0]}</strong>{" "}{b(services[key].title).split(" ").slice(1).join(" ")}</h2><p>{b(services[key].description)}</p><div className="service-tags">{services[key].tags.map(tag => <span key={tag[0]}>{b(tag)}</span>)}</div><button className={`pill ${key === "web" || key === "digital" || key === "production" ? "pill-white" : "pill-black"}`} onClick={() => openModal({ type: "service", key })}>{t("Keşfet", "Explore")}<ArrowUpRight size={23} /></button></div></div></section>)}</ServiceStack>
 
-      <section className="projects section-pad" id="projeler"><div className="section-eyebrow"><span className="eyebrow"><i />{t("FİKİRDEN GÖRÜNENE", "IDEAS MADE VISIBLE")}</span><span className="section-number">03 / SELECTED CONCEPTS</span></div><div className="projects-heading"><h2>{t("Kreatif", "Creative")} <span>{t("işler.", "work.")}</span></h2><p>{t("Her markanın bir hikâyesi var.", "Every brand has a story.")}<br /><span className="muted">{t("Bizim işimiz, onu görünür kılmak.", "We make it visible.")}</span></p></div><div className="project-stage"><div className="project-stack">{[2, 1, 0].map(offset => { const index = (project + offset) % projects.length; return <button key={index} className={`project-card stack-${offset}`} tabIndex={offset === 0 ? 0 : -1} aria-hidden={offset !== 0} onClick={() => openModal({ type: "project", index })}><ProjectArt index={index} /><div className="project-card-meta"><div><h3>{b(projects[index].title)}</h3><span>{b(projects[index].type)}</span></div><span className="project-card-arrow"><ArrowUpRight /></span></div></button>; })}</div></div><div className="project-controls"><span className="concept-note">{t("Tasarım vizyonumuzu yansıtan konsept çalışmalar.", "Concept studies that express our design vision.")}</span><div className="project-pager"><button className="circle-button" onClick={() => setProject((project + 2) % 3)} aria-label={t("Önceki proje", "Previous project")}><ArrowLeft size={20} /></button><span aria-live="polite">0{project + 1}<span> / 03</span></span><button className="circle-button" onClick={() => setProject((project + 1) % 3)} aria-label={t("Sonraki proje", "Next project")}><ArrowRight size={20} /></button></div></div></section>
+      <section className="projects section-pad" id="projeler"><div className="section-eyebrow"><span className="eyebrow"><i />{t("FİKİRDEN GÖRÜNENE", "IDEAS MADE VISIBLE")}</span><span className="section-number">03 / SELECTED WORK</span></div><div className="projects-heading"><h2>{t("Kreatif", "Creative")} <span>{t("işler.", "work.")}</span></h2><p>{t("Her markanın bir hikâyesi var.", "Every brand has a story.")}<br /><span className="muted">{t("Bizim işimiz, onu görünür kılmak.", "We make it visible.")}</span></p></div><div className="project-stage"><div className="project-stack">{[2, 1, 0].map(offset => { const index = (project + offset) % projects.length; return <button key={`${index}-${offset}`} className={`project-card stack-${offset}`} tabIndex={offset === 0 ? 0 : -1} aria-hidden={offset !== 0} onClick={() => openModal({ type: "project", index })}><ProjectArt index={index} /><div className="project-card-meta"><div><h3>{b(projects[index].title)}</h3><span>{b(projects[index].type)}</span></div><span className="project-card-arrow"><ArrowUpRight /></span></div></button>; })}</div></div><div className="project-controls"><span className="concept-note">{t("Seçili web tasarım ve dijital deneyim projelerimiz.", "Selected web design and digital experience projects.")}</span><div className="project-pager"><button className="circle-button" onClick={() => setProject((project - 1 + projects.length) % projects.length)} aria-label={t("Önceki proje", "Previous project")}><ArrowLeft size={20} /></button><span aria-live="polite">{String(project + 1).padStart(2, "0")}<span> / {String(projects.length).padStart(2, "0")}</span></span><button className="circle-button" onClick={() => setProject((project + 1) % projects.length)} aria-label={t("Sonraki proje", "Next project")}><ArrowRight size={20} /></button></div></div></section>
 
       <section className="brand-world reference-world" aria-labelledby="reference-heading">
         <div className="reference-header">
@@ -127,7 +137,7 @@ export default function UgiHome({ serviceSlug, page, articleSlug }: { serviceSlu
         <div className="reference-marquee" aria-label={t("Referans markalar", "Client brands")}>
           <div className="reference-marquee-track">
             {[false, true].map(duplicate => <ul className="reference-logo-group" aria-hidden={duplicate || undefined} key={duplicate ? "duplicate" : "primary"}>
-              {referenceBrands.map((brand, index) => <li className="reference-card" key={`${brand.name}-${index}`}>
+              {referenceBrands.map((brand, index) => <li className={`reference-card${brand.tone ? ` reference-card-${brand.tone}` : ""}`} key={`${brand.name}-${index}`}>
                 <div className="reference-logo"><Image src={brand.src} alt="" width={brand.width} height={brand.height} sizes="(max-width: 640px) 230px, 340px" unoptimized /></div>
                 <span>{brand.name}</span>
                 <small>0{index + 1}</small>
@@ -150,7 +160,7 @@ export default function UgiHome({ serviceSlug, page, articleSlug }: { serviceSlu
       {modal?.type === "quote" && <QuoteForm lang={lang} />}
       {modal?.type === "reel" && <Reel lang={lang} motion={motion} />}
       {modal?.type === "service" && <><span className="eyebrow">UGI / {b(services[modal.key].name).toLocaleUpperCase(lang)}</span><h2 id="modal-title">{modal.title || b(services[modal.key].title)}</h2><p className="modal-lead">{b(services[modal.key].description)}</p><div className="service-detail-list">{services[modal.key].columns.map(col => <div key={col.title[0]}><h3>{b(col.title)}</h3>{col.items.map(item => <p key={item[0]}><Check size={16} />{serviceHref(item[0]) ? <a href={serviceHref(item[0])}>{b(item)} ↗</a> : b(item)}</p>)}</div>)}</div><div className="modal-process"><span>01 / {t("Keşif & Strateji", "Discovery & Strategy")}</span><ArrowRight size={16} /><span>02 / {t("Tasarım & Üretim", "Design & Production")}</span><ArrowRight size={16} /><span>03 / {t("Yayın & Gelişim", "Launch & Grow")}</span></div><button className="pill pill-red" onClick={() => openModal({ type: "quote" })}>{t("Projenizi konuşalım", "Let's talk about your project")}<ArrowUpRight size={20} /></button></>}
-      {modal?.type === "project" && <><span className="eyebrow">{t("KONSEPT ÇALIŞMA", "CONCEPT STUDY")} / 0{modal.index + 1}</span><h2 id="modal-title">{b(projects[modal.index].title)}</h2><ProjectArt index={modal.index} /><p className="project-detail-type">{b(projects[modal.index].type)}</p><p className="modal-lead">{b(projects[modal.index].text)}</p><p className="muted">{t("Bu proje Ugi'nin yaratıcı yaklaşımını göstermek için hazırlanmış kurgusal bir marka çalışmasıdır; müşteri referansı değildir.", "This fictional brand concept was created to demonstrate Ugi's creative approach; it is not a client reference.")}</p><button className="pill pill-red" onClick={() => openModal({ type: "quote" })}>{t("Sizin markanız için?", "What about your brand?")}<ArrowUpRight size={20} /></button></>}
+      {modal?.type === "project" && <><span className="eyebrow">{t("SEÇİLİ PROJE", "SELECTED PROJECT")} / {String(modal.index + 1).padStart(2, "0")}</span><h2 id="modal-title">{b(projects[modal.index].title)}</h2><ProjectArt index={modal.index} /><p className="project-detail-type">{b(projects[modal.index].type)}</p><p className="modal-lead">{b(projects[modal.index].text)}</p><button className="pill pill-red" onClick={() => openModal({ type: "quote" })}>{t("Sizin markanız için?", "What about your brand?")}<ArrowUpRight size={20} /></button></>}
       {modal?.type === "article" && <article className="article-detail"><span className="eyebrow">UGI JOURNAL / {b(articles[modal.index].category)}</span><h2 id="modal-title">{b(articles[modal.index].title)}</h2><span className="muted">{b(articles[modal.index].time)} · Ugi Ajans</span>{articles[modal.index].paragraphs.map((p, i) => <p key={i}>{b(p)}</p>)}<div className="article-signoff"><Logo /><span>{t("Yaratıcı düşünür. Etki yaratır.", "Creative minds. Lasting impact.")}</span></div></article>}
     </div></dialog>
   </div>;

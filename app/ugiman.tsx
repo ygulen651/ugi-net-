@@ -46,7 +46,7 @@ export function Ugiman({ lang, onQuote, onService }: { lang: Lang; onQuote: () =
 
   return <aside className={`ugiman ${open ? "ugiman-open" : ""}`} aria-label="Ugiman">
     {open && <section className="ugiman-panel" role="dialog" aria-modal="false" aria-labelledby="ugiman-title" id="ugiman-panel" onKeyDown={event => { if (event.key === "Escape") { event.stopPropagation(); close(); } }}>
-      <header className="ugiman-panel-head"><span className="ugiman-avatar"><Image src="/images/owl-contact.webp" alt="" width={66} height={66} unoptimized /></span><div><h2 id="ugiman-title">UGIMAN<span>✳</span></h2><p>{t("Dijital dünyanın kanatlı rehberi", "Your winged digital guide")}</p></div><button onClick={close} aria-label={t("Ugiman’ı kapat", "Close Ugiman")}><X size={19} /></button></header>
+      <header className="ugiman-panel-head"><span className="ugiman-avatar"><Image src="/images/MASKOTLAR/ugiman-animated.svg" alt="" width={256} height={256} unoptimized /></span><div><h2 id="ugiman-title">UGIMAN<span>✳</span></h2><p>{t("Dijital dünyanın kanatlı rehberi", "Your winged digital guide")}</p></div><button onClick={close} aria-label={t("Ugiman’ı kapat", "Close Ugiman")}><X size={19} /></button></header>
       <div className="ugiman-log" ref={log} role="log" aria-live="polite" aria-relevant="additions" aria-label={t("Sohbet", "Conversation")}>
         <div className="ugiman-welcome"><span className="ugiman-mini-label">BİR FİKİR + BİR UGIMAN</span><h3>{t("Aklında bir şey mi var?", "Got something in mind?")}</h3><p>{t("Birlikte doğru yerden başlayalım. Markanın neye ihtiyacı var?", "Let's find a starting point. What does your brand need?")}</p></div>
         <div className="ugiman-suggestions">{serviceOrder.map(key => <button key={key} onClick={() => reply(services[key].title[lang === "tr" ? 0 : 1], key)}>{services[key].title[lang === "tr" ? 0 : 1]}<ArrowUpRight size={14} /></button>)}</div>
@@ -57,7 +57,8 @@ export function Ugiman({ lang, onQuote, onService }: { lang: Lang; onQuote: () =
     <button ref={launcher} className="ugiman-launcher" onClick={() => setOpen(value => !value)} aria-label={open ? t("Ugiman’ı kapat", "Close Ugiman") : t("Ugiman ile konuş", "Talk to Ugiman")} aria-expanded={open} aria-controls={open ? "ugiman-panel" : undefined}>
       <span className="ugiman-orbit" aria-hidden="true" /><span className="ugiman-spark" aria-hidden="true"><Sparkles size={22} /></span>
       <span className="ugiman-callout">{t("Bir fikrin mi var?", "Got an idea?")}<strong>{t("Ugiman’a sor ↗", "Ask Ugiman ↗")}</strong></span>
-      <Image className="ugiman-character" src="/images/owl-contact.webp" alt="" width={170} height={146} unoptimized />
+      <Image className="ugiman-character ugiman-character-grumpy" src="/images/MASKOTLAR/owl-digital-think.png" alt="" width={1254} height={1254} unoptimized />
+      <Image className="ugiman-character ugiman-character-happy" src="/images/MASKOTLAR/owl-design-idea.png" alt="" width={1254} height={1254} unoptimized />
       <span className="ugiman-name">UGIMAN <span>✳</span></span>
     </button>
   </aside>;

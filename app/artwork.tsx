@@ -1,4 +1,4 @@
-import { ArrowUpRight, Camera, Code2, Megaphone, PenTool } from "lucide-react";
+import { Camera, Code2, Megaphone, PenTool } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { projects, type ServiceKey } from "./content";
@@ -20,10 +20,10 @@ export function ServiceIcon({ type }: { type: ServiceKey }) {
 }
 
 const serviceMascots: Record<ServiceKey, { src: string; width: number; height: number }> = {
-  web: { src: "/images/MASKOTLAR/ugi-startup-page.png", width: 1467, height: 1524 },
-  design: { src: "/images/MASKOTLAR/owl-portfolio-page.png", width: 1344, height: 1380 },
-  production: { src: "/images/MASKOTLAR/transition-owl.webp", width: 1100, height: 825 },
-  digital: { src: "/images/MASKOTLAR/ugi-journal-page.png", width: 1548, height: 1604 },
+  web: { src: "/images/MASKOTLAR/owl-web-work.png", width: 1024, height: 1536 },
+  design: { src: "/images/MASKOTLAR/owl-design-idea.png", width: 1254, height: 1254 },
+  production: { src: "/images/MASKOTLAR/owl-video-camera.png", width: 1024, height: 1536 },
+  digital: { src: "/images/MASKOTLAR/owl-digital-think.png", width: 1254, height: 1254 },
 };
 
 export function ServiceArt({ type }: { type: ServiceKey }) {
@@ -43,5 +43,5 @@ export function ServiceArt({ type }: { type: ServiceKey }) {
 }
 export function ProjectArt({ index }: { index: number }) {
   const p = projects[index];
-  return <div className={`project-visual ${p.color}`}><div className="project-visual-top"><span>UGI® / CONCEPT SERIES</span><span>0{index + 1} — 2026</span></div>{index === 0 && <div className="nova-rings"><i /><i /><i /><i /></div>}{index === 1 && <div className="luma-orbs"><i /><i /><i /></div>}{index === 2 && <div className="forma-lines"><i /><i /><i /></div>}<div className="project-wordmark">{p.name}<small>{p.suffix}</small></div><ArrowUpRight className="project-visual-arrow" size={30} strokeWidth={1} /></div>;
+  return <div className="project-visual project-screenshot"><Image className="project-screenshot-image" src={p.image.src} alt="" width={p.image.width} height={p.image.height} sizes="(max-width: 640px) 86vw, (max-width: 980px) 76vw, 900px" unoptimized /></div>;
 }

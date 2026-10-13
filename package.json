@@ -7,10 +7,9 @@
   },
   "scripts": {
     "dev": "vinext dev",
-    "build": "next build",
-    "build:vinext": "vinext build",
-    "start": "next start",
-    "test": "npm run build:vinext && node --test tests/site.test.mjs tests/scroll-effects.test.mjs tests/service-catalog.test.mjs",
+    "build": "vinext build",
+    "start": "vinext start",
+    "test": "npm run build && node --test tests/site.test.mjs tests/scroll-effects.test.mjs tests/service-catalog.test.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate"

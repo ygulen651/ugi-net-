@@ -16,10 +16,10 @@ test("production page renders the Turkish site with complete content and no load
   assert.match(response.headers.get("content-type"), /text\/html/);
   assert.match(html, /<html[^>]*lang="tr"/);
   assert.match(html, /<title>Ugi Ajans/);
-  for (const text of ["Dijital dünyada markanızı öne çıkarın.", "Hizmetlerimizi keşfet", "Çalışmalarımız", "Nova Studio", "Luma Living", "Forma Active"]) assert.ok(html.includes(text), text);
+  for (const text of ["Dijital dünyada markanızı öne çıkarın.", "Hizmetlerimizi keşfet", "Çalışmalarımız", "Nova İnşaat", "Nova Lotus Villaları", "Memleketim"]) assert.ok(html.includes(text), text);
   assert.equal((html.match(/<h1[\s>]/g) || []).length, 1);
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview|react-loading-skeleton|Your site is taking shape/);
-  assert.match(html, /konsept çalışmalar/);
+  assert.match(html, /SELECTED WORK/);
 });
 
 test("all navigation anchors have a destination in the rendered page", async () => {
@@ -36,27 +36,37 @@ test("critical imagery, branding, and font assets are included in production", a
   const { html } = await rendered;
   const root = new URL("../dist/client/", import.meta.url);
   const serviceMascots = [
-    "images/MASKOTLAR/ugi-startup-page.png",
-    "images/MASKOTLAR/owl-portfolio-page.png",
-    "images/MASKOTLAR/transition-owl.webp",
-    "images/MASKOTLAR/ugi-journal-page.png",
+    "images/MASKOTLAR/owl-web-work.png",
+    "images/MASKOTLAR/owl-design-idea.png",
+    "images/MASKOTLAR/owl-video-camera.png",
+    "images/MASKOTLAR/owl-digital-think.png",
   ];
   const referenceLogos = [
-    "images/brands/360.png",
-    "images/brands/ani.png",
-    "images/brands/chubby.png",
-    "images/brands/detay-sigorta.png",
-    "images/brands/ilkem.png",
-    "images/brands/kartap.png",
-    "images/brands/oslo.png",
-    "images/brands/pamir-villalari.png",
-    "images/brands/saray.svg",
-    "images/brands/sila-evde-bakim.png",
-    "images/brands/ulak.png",
+    "images/brands/logo-siyah.svg",
+    "images/brands/anibisklogo.svg",
+    "images/brands/bifalogo.png",
+    "images/brands/canbisgidalogo.png",
+    "images/brands/durubulgurlogo.png",
+    "images/brands/hakangidalogo.png",
+    "images/brands/ikev logo.png",
+    "images/brands/kartaplogo.png",
+    "images/brands/larkgidalogo.svg",
+    "images/brands/memleketimlogo.png",
+    "images/brands/novalogo.png",
+    "images/brands/osblogo.png",
+    "images/brands/oslogidalogo.png",
+    "images/brands/saray_biskuvi.png",
   ];
-  await Promise.all(["images/hero-owl.webp", "images/LOGOa.webp", "favicon.png", "fonts/google-fonts.css", ...serviceMascots, ...referenceLogos].map(path => access(new URL(path, root))));
+  const projectScreenshots = [
+    "images/brands/Screenshot_1.png",
+    "images/brands/Screenshot_2.png",
+    "images/brands/Screenshot_3.png",
+    "images/brands/Screenshot_4.png",
+  ];
+  await Promise.all(["images/hero-owl.webp", "images/LOGOa.webp", "images/MASKOTLAR/ugiman-animated.svg", "favicon.png", "fonts/google-fonts.css", ...serviceMascots, ...referenceLogos, ...projectScreenshots].map(path => access(new URL(path, root))));
   for (const path of serviceMascots) assert.ok(html.includes(path.replaceAll("/", "%2F")) || html.includes(`/${path}`), path);
-  for (const name of ["Anı Makarna", "Anı Bisküvi", "Saray Bisküvi", "Oslo", "Chubby Chicken", "360 Karaman", "Kartap", "Karaman Ulak", "Pamir Villaları", "İlkem", "Sıla Evde Bakım", "Detay Sigorta"]) assert.ok(html.includes(name), name);
+  for (const path of projectScreenshots.slice(0, 3)) assert.ok(html.includes(path.replaceAll("/", "%2F")) || html.includes(`/${path}`), path);
+  for (const name of ["Anı Makarna", "Anı Bisküvi", "Bifa", "Canbis Gıda", "Duru Bulgur", "Hakan Gıda", "İKEV", "KARTAP", "Lark Gıda", "Memleketim", "Nova İnşaat", "Karaman OSB", "Oslo Gıda", "Saray Bisküvi"]) assert.ok(html.includes(name), name);
   assert.ok(html.includes("reference-marquee-track"));
   const css = await readFile(new URL("fonts/google-fonts.css", root), "utf8");
   const fonts = Array.from(css.matchAll(/url\((\/fonts\/[^)]+)\)/g), match => match[1]);
