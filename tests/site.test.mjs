@@ -16,7 +16,7 @@ test("production page renders the Turkish site with complete content and no load
   assert.match(response.headers.get("content-type"), /text\/html/);
   assert.match(html, /<html[^>]*lang="tr"/);
   assert.match(html, /<title>Ugi Ajans/);
-  for (const text of ["Dijital dünyada markanızı öne çıkarın.", "Hizmetlerimizi keşfet", "Çalışmalarımız", "Nova İnşaat", "Nova Lotus Villaları", "Memleketim"]) assert.ok(html.includes(text), text);
+  for (const text of ["Dijital dünyada markanızı öne çıkarın.", "Hizmetlerimizi keşfet", "Çalışmalarımız", "Nova İnşaat", "Nova Lotus Villaları", "Newstag"]) assert.ok(html.includes(text), text);
   assert.equal((html.match(/<h1[\s>]/g) || []).length, 1);
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview|react-loading-skeleton|Your site is taking shape/);
   assert.match(html, /SELECTED WORK/);
@@ -37,9 +37,9 @@ test("critical imagery, branding, and font assets are included in production", a
   const root = new URL("../dist/client/", import.meta.url);
   const serviceMascots = [
     "images/MASKOTLAR/owl-web-work.png",
-    "images/MASKOTLAR/owl-design-idea.png",
+    "images/MASKOTLAR/owl-dijital-tasarim.webp",
     "images/MASKOTLAR/owl-video-camera.png",
-    "images/MASKOTLAR/owl-digital-think.png",
+    "images/MASKOTLAR/owl-dijital-pazarlama.webp",
   ];
   const referenceLogos = [
     "images/brands/logo-siyah.svg",
@@ -53,20 +53,20 @@ test("critical imagery, branding, and font assets are included in production", a
     "images/brands/larkgidalogo.svg",
     "images/brands/memleketimlogo.png",
     "images/brands/novalogo.png",
-    "images/brands/osblogo.png",
+    "images/brands/osb-logo.png",
     "images/brands/oslogidalogo.png",
     "images/brands/saray_biskuvi.png",
   ];
   const projectScreenshots = [
     "images/brands/Screenshot_1.png",
     "images/brands/Screenshot_2.png",
-    "images/brands/Screenshot_3.png",
+    "images/brands/newstag.webp",
     "images/brands/Screenshot_4.png",
   ];
   await Promise.all(["images/hero-owl.webp", "images/LOGOa.webp", "images/MASKOTLAR/ugiman-animated.svg", "favicon.png", "fonts/google-fonts.css", ...serviceMascots, ...referenceLogos, ...projectScreenshots].map(path => access(new URL(path, root))));
   for (const path of serviceMascots) assert.ok(html.includes(path.replaceAll("/", "%2F")) || html.includes(`/${path}`), path);
   for (const path of projectScreenshots.slice(0, 3)) assert.ok(html.includes(path.replaceAll("/", "%2F")) || html.includes(`/${path}`), path);
-  for (const name of ["Anı Makarna", "Anı Bisküvi", "Bifa", "Canbis Gıda", "Duru Bulgur", "Hakan Gıda", "İKEV", "KARTAP", "Lark Gıda", "Memleketim", "Nova İnşaat", "Karaman OSB", "Oslo Gıda", "Saray Bisküvi"]) assert.ok(html.includes(name), name);
+  for (const name of ["Yurtsever Group", "Anı Bisküvi", "Bifa", "Canbis Gıda", "Duru Bulgur", "Hakan Gıda", "İKEV", "KARTAP", "Lark Gıda", "Memleketim", "Nova İnşaat", "Karaman OSB", "Oslo Gıda", "Saray Bisküvi"]) assert.ok(html.includes(name), name);
   assert.ok(html.includes("reference-marquee-track"));
   const css = await readFile(new URL("fonts/google-fonts.css", root), "utf8");
   const fonts = Array.from(css.matchAll(/url\((\/fonts\/[^)]+)\)/g), match => match[1]);
@@ -167,7 +167,8 @@ for (const [path, title, current] of [["/hakkimizda", "Hakkımızda", "about"], 
     assert.ok(html.includes(`agency-page ap-${current}`));
     assert.equal((html.match(/<h1[\s>]/g) || []).length, 1);
     assert.ok(html.includes('class="site-footer"'));
-    assert.ok(html.includes('id="ugi-footer-ink"'));
+    assert.ok(html.includes("/images/logo-karanlik.webp") || html.includes("%2Fimages%2Flogo-karanlik.webp"));
+    assert.ok(html.includes('href="https://demordigital.com/tr/web-tasarim"'));
     for (const link of ["/hakkimizda", "/blog", "/iletisim"]) assert.ok(html.includes(`href="${link}"`));
     assert.ok(html.includes(`href="${path}" aria-current="page"`));
     const ids = Array.from(html.matchAll(/\bid="([^"]+)"/g), match => match[1]);
@@ -178,8 +179,8 @@ for (const [path, title, current] of [["/hakkimizda", "Hakkımızda", "about"], 
       assert.ok(html.includes('id="project-brief-heading"'));
       assert.ok(html.includes('name="email"'));
       assert.ok(html.includes('name="message"'));
-      assert.ok(html.includes("Bilgileriniz ajansa gönderilmez."));
-      assert.ok(html.includes("Proje özetini hazırla"));
+      assert.ok(html.includes("hazır mesaj olarak açılır"));
+      assert.ok(html.includes("WhatsApp ile gönder"));
       assert.ok(html.includes('href="mailto:info@ugi.net.tr"'));
       assert.ok(html.includes('href="https://wa.me/905307833370"'));
       assert.ok(html.includes("+90 530 783 33 70"));

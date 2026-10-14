@@ -55,11 +55,11 @@ export function Ugiman({ lang, onQuote, onService }: { lang: Lang; onQuote: () =
       <div className="ugiman-panel-bottom"><button className="ugiman-brief" onClick={quote}>{t("Projemi anlat", "Tell us about your project")}<ArrowUpRight size={17} /></button><form onSubmit={submit}><label className="ugiman-sr-only" htmlFor="ugiman-message">{t("Ugiman’a mesajınız", "Message Ugiman")}</label><input id="ugiman-message" ref={field} value={input} onChange={event => setInput(event.target.value)} placeholder={t("Bir fikirle başla…", "Start with an idea…")} maxLength={500} autoComplete="off" /><button type="submit" disabled={!input.trim()} aria-label={t("Mesajı gönder", "Send message")}><Send size={17} /></button></form><p>{t("Site içeriğine dayalı hizmet rehberi.", "Service guide based on this site's content.")}</p></div>
     </section>}
     <button ref={launcher} className="ugiman-launcher" onClick={() => setOpen(value => !value)} aria-label={open ? t("Ugiman’ı kapat", "Close Ugiman") : t("Ugiman ile konuş", "Talk to Ugiman")} aria-expanded={open} aria-controls={open ? "ugiman-panel" : undefined}>
-      <span className="ugiman-orbit" aria-hidden="true" /><span className="ugiman-spark" aria-hidden="true"><Sparkles size={22} /></span>
-      <span className="ugiman-callout">{t("Bir fikrin mi var?", "Got an idea?")}<strong>{t("Ugiman’a sor ↗", "Ask Ugiman ↗")}</strong></span>
-      <Image className="ugiman-character ugiman-character-grumpy" src="/images/MASKOTLAR/owl-digital-think.png" alt="" width={1254} height={1254} unoptimized />
-      <Image className="ugiman-character ugiman-character-happy" src="/images/MASKOTLAR/owl-design-idea.png" alt="" width={1254} height={1254} unoptimized />
-      <span className="ugiman-name">UGIMAN <span>✳</span></span>
+      <span className="ugiman-body" aria-hidden="true">
+        <span className="ugiman-orbit" /><span className="ugiman-spark"><Sparkles size={22} /></span>
+        <Image className="ugiman-character ugiman-character-grumpy" src="/images/MASKOTLAR/owl-digital-think.png" alt="" width={1254} height={1254} unoptimized />
+        <Image className="ugiman-character ugiman-character-happy" src="/images/MASKOTLAR/owl-design-idea.png" alt="" width={1254} height={1254} unoptimized />
+      </span>
     </button>
   </aside>;
 }

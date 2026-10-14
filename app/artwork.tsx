@@ -5,13 +5,9 @@ import { projects, type ServiceKey } from "./content";
 
 export function Logo({ footer = false }: { footer?: boolean }) {
   return <Link className={`logo ${footer ? "logo-footer" : ""}`} href="/" aria-label="Ugi Ajans">
-    {footer && <svg width="0" height="0" aria-hidden="true" focusable="false" style={{ position: "absolute" }}>
-      <defs><filter id="ugi-footer-ink" colorInterpolationFilters="sRGB">
-        {/* Darken the neutral white lettering while preserving yellow and alpha. */}
-        <feColorMatrix type="matrix" values="1 0 -0.96862745 0 0  0 1 -0.96862745 0 0  0 0 0.03137255 0 0  0 0 0 1 0" />
-      </filter></defs>
-    </svg>}
-    <Image src="/images/LOGOa.webp" alt="" width={120} height={94} sizes="88px" unoptimized />
+    {footer
+      ? <Image src="/images/logo-karanlik.webp" alt="" width={480} height={373} sizes="108px" unoptimized />
+      : <Image src="/images/LOGOa.webp" alt="" width={120} height={94} sizes="88px" unoptimized />}
   </Link>;
 }
 export function ServiceIcon({ type }: { type: ServiceKey }) {
@@ -21,9 +17,9 @@ export function ServiceIcon({ type }: { type: ServiceKey }) {
 
 const serviceMascots: Record<ServiceKey, { src: string; width: number; height: number }> = {
   web: { src: "/images/MASKOTLAR/owl-web-work.png", width: 1024, height: 1536 },
-  design: { src: "/images/MASKOTLAR/owl-design-idea.png", width: 1254, height: 1254 },
+  design: { src: "/images/MASKOTLAR/owl-dijital-tasarim.webp", width: 1033, height: 1143 },
   production: { src: "/images/MASKOTLAR/owl-video-camera.png", width: 1024, height: 1536 },
-  digital: { src: "/images/MASKOTLAR/owl-digital-think.png", width: 1254, height: 1254 },
+  digital: { src: "/images/MASKOTLAR/owl-dijital-pazarlama.webp", width: 1056, height: 1244 },
 };
 
 export function ServiceArt({ type }: { type: ServiceKey }) {

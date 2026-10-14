@@ -25,7 +25,7 @@ type ReferenceBrand = {
 };
 
 const referenceBrands: ReferenceBrand[] = [
-  { name: "Anı Makarna", src: "/images/brands/logo-siyah.svg", width: 312, height: 57 },
+  { name: "Yurtsever Group", src: "/images/brands/logo-siyah.svg", width: 191, height: 46 },
   { name: "Anı Bisküvi", src: "/images/brands/anibisklogo.svg", width: 842, height: 595 },
   { name: "Bifa", src: "/images/brands/bifalogo.png", width: 132, height: 105 },
   { name: "Canbis Gıda", src: "/images/brands/canbisgidalogo.png", width: 1024, height: 503 },
@@ -36,7 +36,7 @@ const referenceBrands: ReferenceBrand[] = [
   { name: "Lark Gıda", src: "/images/brands/larkgidalogo.svg", width: 492, height: 110 },
   { name: "Memleketim", src: "/images/brands/memleketimlogo.png", width: 214, height: 103, tone: "dark" },
   { name: "Nova İnşaat", src: "/images/brands/novalogo.png", width: 6498, height: 2179, tone: "dark" },
-  { name: "Karaman OSB", src: "/images/brands/osblogo.png", width: 1141, height: 91 },
+  { name: "Karaman OSB", src: "/images/brands/osb-logo.png", width: 126, height: 126 },
   { name: "Oslo Gıda", src: "/images/brands/oslogidalogo.png", width: 133, height: 76 },
   { name: "Saray Bisküvi", src: "/images/brands/saray_biskuvi.png", width: 360, height: 190 },
 ];
@@ -140,7 +140,7 @@ export default function UgiHome({ serviceSlug, page, articleSlug }: { serviceSlu
               {referenceBrands.map((brand, index) => <li className={`reference-card${brand.tone ? ` reference-card-${brand.tone}` : ""}`} key={`${brand.name}-${index}`}>
                 <div className="reference-logo"><Image src={brand.src} alt="" width={brand.width} height={brand.height} sizes="(max-width: 640px) 230px, 340px" unoptimized /></div>
                 <span>{brand.name}</span>
-                <small>0{index + 1}</small>
+                <small>{String(index + 1).padStart(2, "0")}</small>
               </li>)}
             </ul>)}
           </div>

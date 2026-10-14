@@ -40,6 +40,4 @@ Fotoğraf kaynağı `public/images/CREDITS.md` içinde yer alır. Diğer görsel
 
 ## Yayın
 
-Vercel için `npm run build` Next.js çıktısını `.next` klasörüne üretir; `npm start` bu çıktıyı çalıştırır. Vercel ayarları `vercel.json` içinde tanımlıdır.
-
-Sites / Cloudflare için `npm run build:vinext` kullanılır. `npm test` bu Worker çıktısını derleyip test eder. Sites proje bağlantısı `.openai/hosting.json` içinde tutulur. Kaynak erişim anahtarları depoya yazılmaz.
+Vinext, React ve Cloudflare Worker çıktısı kullanılır. Sites proje bağlantısı `.openai/hosting.json` içinde tutulur. Kaynak erişim anahtarları depoya yazılmaz.

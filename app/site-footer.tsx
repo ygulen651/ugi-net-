@@ -27,7 +27,7 @@ export function SiteFooter({ lang, inert, onQuote, onService, homePrefix = "" }:
         <div className="sf-project"><span className="sf-label">{t("SIRADAKİ PROJE", "THE NEXT PROJECT")}</span><h3>{t("Sizinle başlasın.", "Starts with you.")}</h3><p>{t("Hedefinizi anlatın. İlk adımı birlikte şekillendirelim.", "Tell us your goal. Let's shape the first step together.")}</p><div className="sf-contact-links"><a href={contactInfo.whatsappHref} target="_blank" rel="noreferrer"><small>WhatsApp</small><strong>{contactInfo.whatsappDisplay}</strong></a><a href={`mailto:${contactInfo.email}`}><small>{t("E-posta", "Email")}</small><strong>{contactInfo.email}</strong></a></div><button onClick={onQuote}>{t("Projenizi anlatın", "Tell us about your project")}<ArrowRight size={19} /></button></div>
       </div>
 
-      <div className="sf-bottom"><span>© 2026 Ugi Ajans. {t("Tüm hakları saklıdır.", "All rights reserved.")}</span><span className="sf-bottom-note">{t("Yaratıcı düşünür. Etki yaratır.", "Creative minds. Lasting impact.")}</span><a href="#top">{t("Başa dön", "Back to top")}<span><ArrowUp size={18} /></span></a></div>
+      <div className="sf-bottom"><span>© 2026 Ugi Ajans. {t("Tüm hakları saklıdır.", "All rights reserved.")}<span className="sf-credit">{lang === "tr" ? <><a href="https://demordigital.com/tr/web-tasarim" target="_blank" rel="noopener">Demor Digital</a> tarafından yapılmıştır.</> : <>Made by <a href="https://demordigital.com/tr/web-tasarim" target="_blank" rel="noopener">Demor Digital</a>.</>}</span></span><span className="sf-bottom-note">{t("Yaratıcı düşünür. Etki yaratır.", "Creative minds. Lasting impact.")}</span><a href="#top">{t("Başa dön", "Back to top")}<span><ArrowUp size={18} /></span></a></div>
     </div>
   </footer>;
 }
